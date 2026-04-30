@@ -1,45 +1,44 @@
 import express from "express";
 import dotenv from "dotenv";
-import cors from "cors"
-
+import cors from "cors";
 import notesRoutes from "./routes/notesRoutes.js";
 import { connectDB } from "./config/db.js";
-import dns from "node:dns/promises";
+import dns from "node:dns"; // Use standard dns for the check
 
 import rateLimiter from "./middleware/rateLimiter.js";
-dns.setServers(["1.1.1.1", "8.8.8.8"]); // Forces Node to use Cloudflare/Google DNS
 
 dotenv.config();
 
-const app = express();
-const port = process.env.PORT || 5001;
+// 1. Only use custom DNS locally
+if (process.env.NODE_ENV !== "production") {
+    dns.setServers(["1.1.1.1", "8.8.8.8"]);
+}
 
-//middle ware
+const app = express();
+
+// 2. Allow all origins for now (so your live frontend can connect)
 app.use(cors({
-  origin:"http://localhost:5173",
-}))
-app.use(express.json()); // this middle ware will parse json bodies: req.body
+  origin: "*", 
+}));
+
+app.use(express.json());
 app.use(rateLimiter);
 
-// middleware are used for mostly authentication
 app.use("/api/notes", notesRoutes);
 
-// our simple custum middleware
-// app.use((req,res,next)=> {
-//     console.log("got a new request");
-//     console.log(`Req methos is ${req.method} and Req Url is ${req.url}`);
-//     next();
-// })
+// 3. Connect to DB immediately (Vercel style)
+connectDB();
 
-// app.use("/api/products", productsRoutes); this also used for these stuff
-// app.use("/api/posts", postsRoutes);
-// app.use("/api/payments", paymentesRoutes);
-// app.use("/api/emails", emailsRoutes);
-
-// rate limiting is a way to control how often someone can do something on a website or applike how many times they can refresh a page, make a request to an API, or try Login.
-
-connectDB().then(() => { //first connectDB only then connect app
-  app.listen(port, () => {
-    console.log("Server started port : 5001");
-  });
+app.get("/", (req, res) => {
+    res.send("Todo API is running...");
 });
+
+// 4. Only listen locally
+if (process.env.NODE_ENV !== "production") {
+    const port = process.env.PORT || 5001;
+    app.listen(port, () => {
+        console.log(`Server started on port: ${port}`);
+    });
+}
+
+export default app;
