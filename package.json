@@ -4,11 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-  "install-all": "npm install && cd frontend && npm install",
-  "build": "cd frontend && npm run build",
-  "start": "node index.js"
-}
-,
+    "install-all": "npm install && cd frontend && npm install",
+    "build": "cd frontend && npm run build",
+    "start": "node index.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/0000000-1/mern-todo.git"
@@ -16,9 +15,18 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/0000000-1/mern-todo/issues"
   },
-  "homepage": "https://github.com/0000000-1/mern-todo#readme"
+  "homepage": "https://github.com/0000000-1/mern-todo#readme",
+  "dependencies": {
+    "@upstash/redis": "^1.38.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.6.2",
+    "redis": "^5.12.1"
+  }
 }
