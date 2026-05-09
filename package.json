@@ -1,0 +1,24 @@
+{
+  "name": "mern-todo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+  "install-all": "npm install && cd frontend && npm install",
+  "build": "cd frontend && npm run build",
+  "start": "node index.js"
+}
+,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/0000000-1/mern-todo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/0000000-1/mern-todo/issues"
+  },
+  "homepage": "https://github.com/0000000-1/mern-todo#readme"
+}
