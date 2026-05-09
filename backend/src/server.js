@@ -12,15 +12,17 @@ dotenv.config();
 
 // 1. Only use custom DNS locally
 if (process.env.NODE_ENV !== "production") {
-    dns.setServers(["1.1.1.1", "8.8.8.8"]);
+  dns.setServers(["1.1.1.1", "8.8.8.8"]);
 }
 
 const app = express();
 
 // 2. Allow all origins for now (so your live frontend can connect)
-app.use(cors({
-  origin: "*", 
-}));
+app.use(
+  cors({
+    origin: "*",
+  }),
+);
 
 app.use(express.json());
 app.use(rateLimiter);
@@ -32,15 +34,14 @@ app.use("/api/auth", authRoutes);
 connectDB();
 
 app.get("/", (req, res) => {
-    res.send("Todo API is running...");
+  res.send("Todo API is running...");
 });
 
 // 4. Only listen locally
-if (process.env.NODE_ENV !== "production") {
-    const port = process.env.PORT || 5000;
-    app.listen(port, () => {
-        console.log(`Server started on port: ${port}`);
-    });
-}
+
+const port = process.env.PORT || 5000;
+app.listen(port, () => {
+  console.log(`Server started on port: ${port}`);
+});
 
 export default app;
