@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/0000000-1/mern-todo#readme",
   "dependencies": {
+    "@upstash/ratelimit": "^2.0.8",
     "@upstash/redis": "^1.38.0",
     "bcryptjs": "^3.0.3",
     "cors": "^2.8.6",
