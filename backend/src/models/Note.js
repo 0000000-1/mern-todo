@@ -6,11 +6,16 @@ import mongoose from "mongoose";
 const noteSchema = new mongoose.Schema({
     title:{
         type:String,
-        require: true,
-    },
+        required: true,
+    }, 
+    userId:{
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'User',
+            required:true
+        },
     content:{
         type:String,
-        require:true
+        required:true
     }
 },{
     timestamps:true // createdAt, updatedAt must add feature

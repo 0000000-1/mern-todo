@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import notesRoutes from "./routes/notesRoutes.js";
+import authRoutes from "./routes/authRoutes.js";
 import { connectDB } from "./config/db.js";
 import dns from "node:dns"; // Use standard dns for the check
 
@@ -25,6 +26,7 @@ app.use(express.json());
 app.use(rateLimiter);
 
 app.use("/api/notes", notesRoutes);
+app.use("/api/auth", authRoutes);
 
 // 3. Connect to DB immediately (Vercel style)
 connectDB();
@@ -35,7 +37,7 @@ app.get("/", (req, res) => {
 
 // 4. Only listen locally
 if (process.env.NODE_ENV !== "production") {
-    const port = process.env.PORT || 5001;
+    const port = process.env.PORT || 5000;
     app.listen(port, () => {
         console.log(`Server started on port: ${port}`);
     });

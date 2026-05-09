@@ -20,8 +20,14 @@ const CreatePage = () => {
     }
     setLoading(true)
     try {
+      const userId = localStorage.getItem("userId"); 
+      
+    if (!userId) {
+      toast.error("User ID not found. Please log in again.");
+      return;
+    }
       await api.post("/notes", {
-        title, content 
+        title, content, userId
       })
       toast.success("Note created Successfully!")
 

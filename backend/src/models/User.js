@@ -1,4 +1,5 @@
 import mongoose, { model } from "mongoose"
+import Note from "./Note.js"
 
 const userSchema = new mongoose.Schema({
    username:{
@@ -17,6 +18,15 @@ const userSchema = new mongoose.Schema({
    }
 },{
     timestamps:true
+})
+userSchema.pre('findOneAndDelete', async function (next) {
+    const userId = this.getQuery()._id
+    try {
+        await Note.deleteMany({userId: userId})
+        next()
+    } catch (err) {
+        next(err)
+    }
 })
 
 const User = mongoose.model('User', userSchema)

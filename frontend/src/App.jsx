@@ -1,7 +1,9 @@
 import { Routes, Route } from "react-router";
-import HomePage from "./pages/HomePage";
+import HomePage from "./pages/HomePage.jsx";
 import CreatePage from "./pages/CreatePage";
 import NoteDetailPage from "./pages/NoteDetailPage";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
 
 const App = () => {
   return (
@@ -11,6 +13,10 @@ const App = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/create" element={<CreatePage />} />
         <Route path="/note/:id" element={<NoteDetailPage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="*" element={<h1>404 - Page Not Found</h1>} />
+
       </Routes>
     </div>
   );
