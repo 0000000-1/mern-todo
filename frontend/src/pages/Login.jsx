@@ -29,7 +29,7 @@ const Login = () => {
 
       // setUser(res.data.user);
       // return res
-      console.log(res);
+      // console.log(res);
 
       navigate('/')
 
