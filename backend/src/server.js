@@ -3,12 +3,12 @@ import dotenv from "dotenv";
 import cors from "cors";
 import notesRoutes from "./routes/notesRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
-import { connectDB } from "./config/db.js";
 import dns from "node:dns"; // Use standard dns for the check
 
 import rateLimiter from "./middleware/rateLimiter.js";
 
 dotenv.config();
+import { connectDB } from "./config/db.js";
 
 // 1. Only use custom DNS locally
 if (process.env.NODE_ENV !== "production") {
