@@ -45,8 +45,12 @@ const HomePage = () => {
       <NavBar />
       {isRateLimited && <RateLimitedUI />}
       <div>
-        {user ? <h1> Welcome {user.username} !</h1> : ""}
-      </div>
+     {user && (
+  <h1 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-green-500 tracking-tight sm:text-4xl my-6">
+    Welcome, <span className="text-gray-900 dark:text-white font-black">{user.username}</span>!
+  </h1>
+)}
+ </div>
       {!user ? 
       <div className='text-center py-8 '>Please login to see your notes     
         {notes.length === 0 && !isRateLimited && <NotesNotfound />}

@@ -48,7 +48,22 @@ const Login = () => {
     <div className="min-h-screen flex items-center justify-center px-4 "> {/* Added bg-black for context */}
       <div className="w-full max-w-md bg-gray-900 rounded-2xl shadow-xl p-8 border border-gray-800">
         <form onSubmit={handleSubmit} className="space-y-5">
-          <h1 className="text-2xl font-bold text-white">Login</h1>
+             <div className="grid grid-cols-3 items-center w-full max-w-md mx-auto mb-6">
+                      {/* Left Column: Back Arrow */}
+                      <div className="justify-self-start">
+                        <Link to="/" className="text-emerald-400 hover:text-emerald-300 text-sm font-bold transition-colors">
+                          ← back
+                        </Link>
+                      </div>
+          
+                      {/* Center Column: Heading */}
+                      <h1 className="text-2xl font-bold text-white text-center whitespace-nowrap col-start-2">
+                        Login
+                      </h1>
+          
+                      {/* Right Column: Empty spacer to balance out the grid centering */}
+                      <div className="w-4"></div>
+                    </div>
           {error && (
             <div className="bg-red-500/10 border border-red-500/50 text-red-500 text-xs p-3 rounded-lg">
               {error}
