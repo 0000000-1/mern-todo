@@ -43,11 +43,18 @@ app.get("/", (req, res) => {
   res.send("Todo API is running...");
 });
 
+// 1. Keep the export so other tools (like testing suites) can use it
 export const startServer = () => {
-  const port = Number(process.env.PORT) || 5001;
-  return app.listen(port, () => {
+  // Render recommends port 10000 by default
+  const port = Number(process.env.PORT) || 10000; 
+  
+  // Explicitly binding to "0.0.0.0" ensures Render intercepts the port mapping flawlessly
+  return app.listen(port, "0.0.0.0", () => {
     console.log(`Server started on port: ${port}`);
   });
 };
+
+// 2. FIX: Automatically execute the server listener when deploying
+startServer();
 
 export default app;
